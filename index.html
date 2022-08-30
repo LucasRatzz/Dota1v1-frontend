@@ -2,62 +2,202 @@
 <html>
 
 <head>
-    <title>DOTA 1 V 1 </title>
+  <title>DOTA 1 V 1 </title>
 </head>
+<style>
+  @font-face {
+    font-family: "Radiance";
+    src: url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance.eot");
+    src: url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance.eot?#iefix") format("embedded-opentype"), url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance.woff") format("woff"), url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance.ttf") format("truetype"), url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/radiance.svg#ywftsvg") format("svg");
+    font-weight: normal;
+    font-style: normal
+  }
 
-<body>
-    <div style="display:flex;justify-content:center">
-        <!--Titulo-->
-        <h1 style="color:ffcb11">
-            DOTA 1 VS 1
-        </h1>
-    </div>
-    <!--comentário-->
-    <div style="display:flex;justify-content:space-around">
-        <!--Div mãe-->
-        <div>
-            <div style="border: 2px solid black; border-radius: 10px; display: flex; flex-direction: column; align-items: center;"> <!--Div ogre-->
-                <h1>ogro magia</h1>
-                <img src="ogro.jpg" width="50%" height="50%">
-                <div>
-                  <h1>Atributos do herói</h1>
-                  Agi: <br/>
-                  Str:<br/>
-                  Int:<br/>
-                  Dano:<br/>
-                  Vida total:<br/>
-                  Armor:<br/>
-                  Level:<br/>
-                </div>
-            </div>
-            <div style="border: 2px solid green;background-color: greenyellow; text-align: center;">vida</div>
-            <div style="border: 2px solid blue;background-color: rgb(0, 110, 255); text-align: center;">mana</div>
-        </div>
-        <img src="versus.png" width="30%" height="30%">
-        <div>
-          <div style="border: 2px solid black; border-radius: 10px; display: flex; flex-direction: column; align-items: center;"> <!--Div mars-->
-            <h1>março</h1>
-            <img src="mars.jpg" width="50%" height="50%">
+  @font-face {
+    font-family: "Reaver";
+    src: url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/Reaver-Regular.woff") format("woff"), url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/Reaver-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal
+  }
+
+  .heroesBackgroundColor {
+    display: flex;
+    flex-direction: column;
+    background-color: #84732B;
+  }
+
+  .cardStyle {
+    padding-top: 3%;
+    padding-right: 3%;
+    padding-bottom: 2%;
+    padding-left: 3%;
+    border: 2px solid black;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+
+  .imgHerosStyle {
+    border-style: solid;
+    border-color: rgba(161, 45, 45, 0.692);
+    border-style: outset;
+  }
+
+  .manaStyle {
+    border: 2px solid blue;
+    background-color: rgb(0, 110, 255);
+    height: 3%;
+    width: 81%;
+    text-align: center;
+    border-radius: 10px;
+    margin-left: 10%;
+    margin-right: 5%;
+  }
+
+  .hpStyle {
+    border: 2px solid green;
+    background-color: greenyellow;
+    height: 3%;
+    width: 81%;
+    text-align: center;
+    border-radius: 10px;
+    margin-left: 10%;
+    margin-right: 5%;
+  }
+
+  .background {
+    background-image: url('background.jpg');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100%;
+  }
+
+  .background::before {
+    z-index: -1;
+    content: "";
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    bottom: 0px;
+    left: 0px;
+    background-color: rgba(0, 0, 0, 0.25);
+    pointer-events: none;
+  }
+
+  .radiance {
+    font-family: 'Radiance';
+    color: white;
+  }
+
+  .reaver {
+    font-family: 'Reaver';
+    color: white;
+  }
+
+  .bodyCardStyle {
+    margin-top: 0.5cm;
+    margin-right: 1cm;
+    margin-bottom: 0cm;
+    margin-left: 1cm;
+    border-style: solid;
+    border-radius: 10px;
+    min-height: 100px;
+    overflow-y: auto;
+  }
+
+  .logStyle {
+    height: 100%;
+    width: 100%;
+    border: 1px solid rgb(2, 139, 43);
+    font: 16px/26px Georgia, Garamond, Serif;
+    overflow: auto;
+  }
+
+  .scrollbar {
+    margin-left: 4.2%;
+    float: left;
+    height: 100%;
+    width: 87%;
+    background: black;
+    overflow-y: scroll;
+    margin-bottom: 25px;
+  }
+
+  .centralized-text {
+    text-align: center;
+  }
+
+  .father-div-cards {
+    width: 20vw;
+    height: 60vh;
+  }
+</style>
+
+<body class="background">
+
+  <div style="display:flex;justify-content:center">
+    <!--Titulo-->
+    <h1 class="reaver centralized-text" style="font-size: 225%;" >
+      D O T A  <br/>
+      1  VS  1
+    </h1>
+  </div>
+  <!--comentário-->
+  <div style="display:flex;justify-content:space-around">
+    <!--Div mãe-->
+    <div class="father-div-cards">
+      <div class="cardStyle heroesBackgroundColor">
+        <!--Div ogre-->
+        <img src="ogro.png" class="imgHerosStyle">
+        <div class="bodyCardStyle">
+          <div style="display:flex;justify-content:left"><img src="atri_agi.png" width="27%" height="13%">
             <div>
-                <h1>Atributos do herói</h1>
-                Agi:<br/>
-                Str:<br/>
-                Int:<br/>
-                Dano:<br/>
-                Vida total:<br/>
-                Armor:<br/>
-                Level:<br/>
+              teste
             </div>
-          </div>  
-          <div style="border: 2px solid green;background-color: greenyellow; text-align: center;">vida</div>
-          <div style="border: 2px solid blue;background-color: rgb(0, 110, 255); text-align: center;">mana</div>
+          </div>
+          <img src="atri_str.png"> <br />
+          <img src="atri_int.png"> <br />
+          <img src="attack_melee.svg" width="10%" height="13%"> <br />
+          Vida total:<br />
+          <img src="armor.png"> <br />
+          Level:<br />
         </div>
+      </div>
+      <div class="hpStyle">vida</div>
+      <div class="manaStyle">mana</div>
     </div>
+    <img src="versus_che2.png" width="230vw" height="230vw">
+    <div class="father-div-cards">
+      <div class="cardStyle heroesBackgroundColor">
+        <!--Div mars-->
+        <img src="mars.png" class="imgHerosStyle">
+        <div class="bodyCardStyle">
+          <img src="atri_agi.png"> <br />
+          <img src="atri_str.png"> <br />
+          <img src="atri_int.png"> <br />
+          <img src="attack_ranged.svg" width="10%" height="13%"> <br />
+          Vida total:<br />
+          <img src="armor.png"> <br />
+          Level:<br />
+        </div>
+      </div>
+      <div class="hpStyle">vida</div>
+      <div class="manaStyle">mana</div>
+    </div>
+  </div>
+  <div>
+    <div class="logStyle scrollbar" style="color: green;">
+      texto teste para log de combate texto teste para log de combate texto teste para log de combate texto teste para
+      log de combate texto teste para log de combate
+    </div>
+  </div>
 
-    <!--height: 100px;
+  </div>
+
+  <!--height: 100px;
   width: 500px;-->
-
-    <div></div>
 </body>
 
 </html>
