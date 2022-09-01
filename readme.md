@@ -2,6 +2,10 @@
 
 Para servir localmente o site execute `npm run start:local`
 
+## Resoluções suportadas
+
+1024 x 768 -> 4K
+
 ## Atividades
 
 - Definir cor dos cards

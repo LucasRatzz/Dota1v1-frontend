@@ -29,7 +29,7 @@
   .cardStyle {
     padding-top: 3%;
     padding-right: 3%;
-    padding-bottom: 2%;
+    padding-bottom: 3%;
     padding-left: 3%;
     border: 2px solid black;
     border-radius: 10px;
@@ -48,30 +48,51 @@
   .manaStyle {
     border: 2px solid blue;
     background-color: rgb(0, 110, 255);
-    height: 3%;
-    width: 81%;
+    height: 3vh;
+    width: 88.5%;
     text-align: center;
+    vertical-align: middle;
     border-radius: 10px;
-    margin-left: 10%;
-    margin-right: 5%;
+    margin-left: 5.2%;
+    margin-right: 0%;
   }
 
   .hpStyle {
     border: 2px solid green;
-    background-color: greenyellow;
-    height: 3%;
-    width: 81%;
+    height: 3vh;
+    width: 88.5%;
     text-align: center;
+    vertical-align: middle;
     border-radius: 10px;
-    margin-left: 10%;
-    margin-right: 5%;
+    margin-left: 5.2%;
+    margin-right: 0%;
+    position: relative;
+  }
+
+  .current-hp {
+    background-color: limegreen;
+    height: 3vh;
+    width: 50%;
+    border-radius: 10px;
+  }
+
+  .hp-label {
+    white-space: nowrap;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
   }
 
   .background {
     background-image: url('background.jpg');
     background-repeat: no-repeat;
     background-position: center;
-    background-size: 100%;
+    background-size: cover;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
   }
 
   .background::before {
@@ -88,12 +109,10 @@
 
   .radiance {
     font-family: 'Radiance';
-    color: white;
   }
 
   .reaver {
     font-family: 'Reaver';
-    color: white;
   }
 
   .bodyCardStyle {
@@ -105,6 +124,7 @@
     border-radius: 10px;
     min-height: 100px;
     overflow-y: auto;
+    
   }
 
   .logStyle {
@@ -129,9 +149,13 @@
     text-align: center;
   }
 
+  .white-text {
+    color: white;
+  }
+
   .father-div-cards {
     width: 20vw;
-    height: 60vh;
+    height: 65vh;
   }
 </style>
 
@@ -139,7 +163,7 @@
 
   <div style="display:flex;justify-content:center">
     <!--Titulo-->
-    <h1 class="reaver centralized-text" style="font-size: 225%;" >
+    <h1 class="reaver centralized-text white-text" style="font-size: 225%;" >
       D O T A  <br/>
       1  VS  1
     </h1>
@@ -147,40 +171,109 @@
   <!--comentário-->
   <div style="display:flex;justify-content:space-around">
     <!--Div mãe-->
-    <div class="father-div-cards">
+    <div class="father-div-cards reaver">
       <div class="cardStyle heroesBackgroundColor">
         <!--Div ogre-->
         <img src="ogro.png" class="imgHerosStyle">
         <div class="bodyCardStyle">
-          <div style="display:flex;justify-content:left"><img src="atri_agi.png" width="27%" height="13%">
-            <div>
+          <div style="display:flex;justify-content:left">
+            <img src="atri_agi.png" style="height: 4vh; width: 4vh;">
+            <div style="display:flex;align-items:center">
               teste
             </div>
           </div>
-          <img src="atri_str.png"> <br />
-          <img src="atri_int.png"> <br />
-          <img src="attack_melee.svg" width="10%" height="13%"> <br />
-          Vida total:<br />
-          <img src="armor.png"> <br />
-          Level:<br />
+          <div style="display:flex;justify-content:left">
+            <img src="atri_str.png" style= "height: 4vh; width: 4vh">
+            <div style="display:flex;align-items:center">
+              teste2
+            </div>
+          </div>
+          <div style="display:flex;justify-content:left">
+          <img src="atri_int.png" style= "height: 4vh; width: 4vh">
+          <div style="display:flex;align-items:center">
+            teste3
+          </div>
+          </div>
+          <div style="display:flex;justify-content:left">
+            <img src="attack_melee.svg" style= "height: 4vh; width: 4vh">
+            <div style="display:flex;align-items:center">
+              teste4
+            </div> 
+          </div>
+          <div style="display:flex;justify-content:left">
+            <img src="life.svg" style="height: 4vh; width: 4vh;">
+            <div style="display:flex;align-items:center">
+              coite
+            </div>
+          </div>
+          <div style="display:flex;justify-content:left">
+            <img src="armor.png" style="height: 4vh; width: 4vh;">
+            <div style="display:flex;align-items:center">
+              coite
+            </div>
+          </div>
+          <div style="display:flex;justify-content:left">
+            <img src="level-up.png" style="height: 4vh; width: 4vh;">
+            <div style="display:flex;align-items:center">
+              coite
+            </div>
+          </div>
         </div>
       </div>
-      <div class="hpStyle">vida</div>
+      <div class="hpStyle">
+        <div class="current-hp"></div>
+        <span class="hp-label" >1000 / 2000</span>
+      </div>
       <div class="manaStyle">mana</div>
     </div>
     <img src="versus_che2.png" width="230vw" height="230vw">
-    <div class="father-div-cards">
+    <div class="father-div-cards reaver">
       <div class="cardStyle heroesBackgroundColor">
         <!--Div mars-->
         <img src="mars.png" class="imgHerosStyle">
         <div class="bodyCardStyle">
-          <img src="atri_agi.png"> <br />
-          <img src="atri_str.png"> <br />
-          <img src="atri_int.png"> <br />
-          <img src="attack_ranged.svg" width="10%" height="13%"> <br />
-          Vida total:<br />
-          <img src="armor.png"> <br />
-          Level:<br />
+          <div style="display:flex;justify-content:left">
+            <img src="atri_agi.png" style="height: 4vh; width: 4vh;">
+            <div style="display:flex;align-items:center">
+              teste
+            </div>
+          </div>
+          <div style="display:flex;justify-content:left">
+            <img src="atri_str.png" style= "height: 4vh; width: 4vh">
+            <div style="display:flex;align-items:center">
+              teste2
+            </div>
+          </div>
+          <div style="display:flex;justify-content:left">
+          <img src="atri_int.png" style= "height: 4vh; width: 4vh">
+          <div style="display:flex;align-items:center">
+            teste3
+          </div>
+          </div>
+          <div style="display:flex;justify-content:left">
+            <img src="attack_ranged.svg" style="height: 4vh; width: 4vh">
+            <div style="display:flex;align-items:center">
+              teste3
+            </div>
+          </div>
+          <div style="display:flex;justify-content:left">
+            <img src="life.svg" style="height: 4vh; width: 4vh;">
+            <div style="display:flex;align-items:center">
+              teste3
+            </div>
+          </div>
+          <div style="display:flex;justify-content:left">
+            <img src="armor.png" style="height: 4vh; width: 4vh;">
+            <div style="display:flex;align-items:center">
+              teste3
+            </div>
+          </div>
+          <div style="display:flex;justify-content:left">
+            <img src="level-up.png" style="height: 4vh; width: 4vh;">
+            <div style="display:flex;align-items:center">
+              teste3
+            </div>
+          </div>
         </div>
       </div>
       <div class="hpStyle">vida</div>
