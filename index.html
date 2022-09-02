@@ -46,8 +46,7 @@
   }
 
   .manaStyle {
-    border: 2px solid blue;
-    background-color: rgb(0, 110, 255);
+    border: 2px solid rgb(0, 81, 128);
     height: 3vh;
     width: 88.5%;
     text-align: center;
@@ -55,6 +54,22 @@
     border-radius: 10px;
     margin-left: 5.2%;
     margin-right: 0%;
+    position: relative;
+  }
+
+  .current-mana {
+    background-color: blue;
+    height: 3vh;
+    width: 50%;
+    border-radius: 10px;
+  }
+  .mana-label {
+    white-space: nowrap;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
   }
 
   .hpStyle {
@@ -224,7 +239,10 @@
         <div class="current-hp"></div>
         <span class="hp-label" >1000 / 2000</span>
       </div>
-      <div class="manaStyle">mana</div>
+      <div class="manaStyle">
+        <div class="current-mana"></div>
+        <span class="mana-label" >1000 / 2000</span>
+      </div>
     </div>
     <img src="versus_che2.png" width="230vw" height="230vw">
     <div class="father-div-cards reaver">
@@ -276,8 +294,14 @@
           </div>
         </div>
       </div>
-      <div class="hpStyle">vida</div>
-      <div class="manaStyle">mana</div>
+      <div class="hpStyle">
+        <div class="current-hp"></div>
+        <span class="hp-label" >1000 / 2000</span>
+      </div>
+      <div class="manaStyle">
+        <div class="current-mana"></div>
+        <span class="mana-label" >1000 / 2000</span>
+      </div>
     </div>
   </div>
   <div>
