@@ -2,6 +2,19 @@
 <html>
 
 <head>
+  <script src="https://unpkg.com/axios/dist/axios.min.js">
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      axios.get("http://localhost:3000/heroes").then((res) => {
+        console.log(res.data)
+        let agiPlayer1 = document.getElementsByClassName('player1 agi')[0]
+        agiPlayer1.innerHTML = res.data[0].agi
+      }).catch((error) => {
+        console.log(error.message)
+      });
+    });
+  </script>
   <title>DOTA 1 V 1 </title>
 </head>
 <style>
@@ -63,6 +76,7 @@
     width: 50%;
     border-radius: 10px;
   }
+
   .mana-label {
     white-space: nowrap;
     position: absolute;
@@ -139,7 +153,7 @@
     border-radius: 10px;
     min-height: 100px;
     overflow-y: auto;
-    
+
   }
 
   .logStyle {
@@ -178,9 +192,9 @@
 
   <div style="display:flex;justify-content:center">
     <!--Titulo-->
-    <h1 class="reaver centralized-text white-text" style="font-size: 225%;" >
-      D O T A  <br/>
-      1  VS  1
+    <h1 class="reaver centralized-text white-text" style="font-size: 225%;">
+      D O T A <br />
+      1 VS 1
     </h1>
   </div>
   <!--comentário-->
@@ -193,27 +207,27 @@
         <div class="bodyCardStyle">
           <div style="display:flex;justify-content:left">
             <img src="atri_agi.png" style="height: 4vh; width: 4vh;">
-            <div style="display:flex;align-items:center">
-              teste
+            <div style="display:flex;align-items:center" class="player1 agi">
+
             </div>
           </div>
           <div style="display:flex;justify-content:left">
-            <img src="atri_str.png" style= "height: 4vh; width: 4vh">
+            <img src="atri_str.png" style="height: 4vh; width: 4vh">
             <div style="display:flex;align-items:center">
               teste2
             </div>
           </div>
           <div style="display:flex;justify-content:left">
-          <img src="atri_int.png" style= "height: 4vh; width: 4vh">
-          <div style="display:flex;align-items:center">
-            teste3
-          </div>
+            <img src="atri_int.png" style="height: 4vh; width: 4vh">
+            <div style="display:flex;align-items:center">
+              teste3
+            </div>
           </div>
           <div style="display:flex;justify-content:left">
-            <img src="attack_melee.svg" style= "height: 4vh; width: 4vh">
+            <img src="attack_melee.svg" style="height: 4vh; width: 4vh">
             <div style="display:flex;align-items:center">
               teste4
-            </div> 
+            </div>
           </div>
           <div style="display:flex;justify-content:left">
             <img src="life.svg" style="height: 4vh; width: 4vh;">
@@ -237,11 +251,11 @@
       </div>
       <div class="hpStyle">
         <div class="current-hp"></div>
-        <span class="hp-label" >1000 / 2000</span>
+        <span class="hp-label">1000 / 2000</span>
       </div>
       <div class="manaStyle">
         <div class="current-mana"></div>
-        <span class="mana-label" >1000 / 2000</span>
+        <span class="mana-label">1000 / 2000</span>
       </div>
     </div>
     <img src="versus_che2.png" width="230vw" height="230vw">
@@ -257,16 +271,16 @@
             </div>
           </div>
           <div style="display:flex;justify-content:left">
-            <img src="atri_str.png" style= "height: 4vh; width: 4vh">
+            <img src="atri_str.png" style="height: 4vh; width: 4vh">
             <div style="display:flex;align-items:center">
               teste2
             </div>
           </div>
           <div style="display:flex;justify-content:left">
-          <img src="atri_int.png" style= "height: 4vh; width: 4vh">
-          <div style="display:flex;align-items:center">
-            teste3
-          </div>
+            <img src="atri_int.png" style="height: 4vh; width: 4vh">
+            <div style="display:flex;align-items:center">
+              teste3
+            </div>
           </div>
           <div style="display:flex;justify-content:left">
             <img src="attack_ranged.svg" style="height: 4vh; width: 4vh">
@@ -296,11 +310,11 @@
       </div>
       <div class="hpStyle">
         <div class="current-hp"></div>
-        <span class="hp-label" >1000 / 2000</span>
+        <span class="hp-label">1000 / 2000</span>
       </div>
       <div class="manaStyle">
         <div class="current-mana"></div>
-        <span class="mana-label" >1000 / 2000</span>
+        <span class="mana-label">1000 / 2000</span>
       </div>
     </div>
   </div>
