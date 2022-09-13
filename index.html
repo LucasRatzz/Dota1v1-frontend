@@ -8,8 +8,55 @@
     document.addEventListener("DOMContentLoaded", () => {
       axios.get("http://localhost:3000/heroes").then((res) => {
         console.log(res.data)
+        let strPlayer1 = document.getElementsByClassName('player1 str')[0]
+        let strPlayer2 = document.getElementsByClassName('player2 str')[0]
         let agiPlayer1 = document.getElementsByClassName('player1 agi')[0]
-        agiPlayer1.innerHTML = res.data[0].agi
+        let agiPlayer2 = document.getElementsByClassName('player2 agi')[0]
+        let intPlayer1 = document.getElementsByClassName('player1 int')[0]
+        let intPlayer2 = document.getElementsByClassName('player2 int')[0]
+        let maxHitPointsPlayer1 = document.getElementsByClassName('player1 maxHitPoints')[0]
+        let maxHitPointsPlayer2 = document.getElementsByClassName('player2 maxHitPoints')[0]
+        let hitPointsPlayer1 = document.getElementsByClassName('player1 hitPoints')[0]
+        let hitPointsPlayer2 = document.getElementsByClassName('player2 hitPoints')[0]
+        let maxManaPlayer1 = document.getElementsByClassName('player1 maxMana')[0]
+        let maxManaPlayer2 = document.getElementsByClassName('player2 maxMana')[0]
+        let manaPlayer1 = document.getElementsByClassName('player1 manaPlayer1')[0]
+        let manaPlayer2 = document.getElementsByClassName('player2 manaPlayer2')[0]
+        let damagePlayer1 = document.getElementsByClassName('player1 damage')[0]
+        let damagePlayer2 = document.getElementsByClassName('player2 damage')[0]
+        let baseArmorPlayer1 = document.getElementsByClassName('player1 baseArmor')[0]
+        let baseArmorPlayer2 = document.getElementsByClassName('player2 baseArmor')[0]
+        let baseAttackTimePlayer1 = document.getElementsByClassName('player1 baseAttackTime')[0]
+        let baseAttackTimePlayer2 = document.getElementsByClassName('player2 baseAttackTime')[0]
+        let levelPlayer1 = document.getElementsByClassName('player1 levelPlayer1')[0]
+        let levelPlayer2 = document.getElementsByClassName('player2 levelPlayer2')[0]
+
+        const fillFrontData = (hero, playerElements) => {
+
+          
+          playerElements.agi.innerHTML = hero.agi
+          playerElements.str.innerHTML = hero.str
+          playerElements.int.innerHTML = hero.int
+          playerElements.damage.innerHTML = hero.damage
+          playerElements.baseArmor.innerHTML = hero.baseArmor
+          playerElements.level.innerHTML = hero.level
+          //playerElements.maxHitPoints.innerHTML = hero.maxHitPoints
+          //playerElements.hitPoints.innerHTML = hero.hitPoints
+          // playerElements.maxMana.innerHTML = hero.maxMana
+          // playerElements.mana.innerHTML = hero.mana
+          // playerElements.baseAttackTime.innerHTML = hero.baseAttackTime
+        }
+
+        console.log('1')
+        fillFrontData(res.data[0], { agi: agiPlayer1, str: strPlayer1, int: intPlayer1, damage: damagePlayer1, baseArmor: baseArmorPlayer1, level: levelPlayer1 }) //damage: damagePlayer1, baseArmor: baseArmorPlayer1, baseAttackTime: baseAttackTimePlayer1, level: 1}/)
+        
+        console.log('2')
+       fillFrontData(res.data[1], { agi: agiPlayer2, str: strPlayer2, int: intPlayer2, damage: damagePlayer2, baseArmor: baseArmorPlayer2, level: levelPlayer2 })//damage: damagePlayer2, baseArmor: baseArmorPlayer2, baseAttackTime: baseAttackTimePlayer2, level: 1})
+
+
+        //fillFrontData(res.data[1], { agi: agiPlayer2 , str: strPlayer2, int: intPlayer2, maxHitPoints: maxHitPointsPlayer2, hitPoints: hitPointsPlayer2,maxMana: maxManaPlayer2, mana: manaPlayer2,dmg: damagePlayer2, baseArmor: baseArmorPlayer2, baseAttackTime: baseAttackTimePlayer2, level: 1})
+        //fillFrontData(res.data[1], { agi: agiPlayer2 })
+
       }).catch((error) => {
         console.log(error.message)
       });
@@ -208,43 +255,38 @@
           <div style="display:flex;justify-content:left">
             <img src="atri_agi.png" style="height: 4vh; width: 4vh;">
             <div style="display:flex;align-items:center" class="player1 agi">
-
             </div>
           </div>
           <div style="display:flex;justify-content:left">
             <img src="atri_str.png" style="height: 4vh; width: 4vh">
-            <div style="display:flex;align-items:center">
-              teste2
+            <div style="display:flex;align-items:center" class="player1 str">
+
             </div>
           </div>
           <div style="display:flex;justify-content:left">
             <img src="atri_int.png" style="height: 4vh; width: 4vh">
-            <div style="display:flex;align-items:center">
-              teste3
+            <div style="display:flex;align-items:center" class="player1 int">
             </div>
           </div>
           <div style="display:flex;justify-content:left">
             <img src="attack_melee.svg" style="height: 4vh; width: 4vh">
-            <div style="display:flex;align-items:center">
-              teste4
+            <div style="display:flex;align-items:center" class="player1 damage">
             </div>
           </div>
-          <div style="display:flex;justify-content:left">
+          <!-- <div style="display:flex;justify-content:left">
             <img src="life.svg" style="height: 4vh; width: 4vh;">
             <div style="display:flex;align-items:center">
               coite
             </div>
-          </div>
+          </div> -->
           <div style="display:flex;justify-content:left">
             <img src="armor.png" style="height: 4vh; width: 4vh;">
-            <div style="display:flex;align-items:center">
-              coite
+            <div style="display:flex;align-items:center" class="player1 baseArmor">
             </div>
           </div>
           <div style="display:flex;justify-content:left">
             <img src="level-up.png" style="height: 4vh; width: 4vh;">
-            <div style="display:flex;align-items:center">
-              coite
+            <div style="display:flex;align-items:center" class="player1 levelPlayer1">              
             </div>
           </div>
         </div>
@@ -266,44 +308,43 @@
         <div class="bodyCardStyle">
           <div style="display:flex;justify-content:left">
             <img src="atri_agi.png" style="height: 4vh; width: 4vh;">
-            <div style="display:flex;align-items:center">
-              teste
+            <div style="display:flex;align-items:center" class="player2 agi">
             </div>
           </div>
           <div style="display:flex;justify-content:left">
             <img src="atri_str.png" style="height: 4vh; width: 4vh">
-            <div style="display:flex;align-items:center">
-              teste2
+            <div style="display:flex;align-items:center" class="player2 str">
+
             </div>
           </div>
           <div style="display:flex;justify-content:left">
             <img src="atri_int.png" style="height: 4vh; width: 4vh">
-            <div style="display:flex;align-items:center">
-              teste3
+            <div style="display:flex;align-items:center" class="player2 int">
+
             </div>
           </div>
           <div style="display:flex;justify-content:left">
             <img src="attack_ranged.svg" style="height: 4vh; width: 4vh">
-            <div style="display:flex;align-items:center">
-              teste3
+            <div style="display:flex;align-items:center" class="player2 damage">
+
             </div>
           </div>
-          <div style="display:flex;justify-content:left">
+          <!-- <div style="display:flex;justify-content:left">
             <img src="life.svg" style="height: 4vh; width: 4vh;">
-            <div style="display:flex;align-items:center">
-              teste3
+            <div style="display:flex;align-items:center" class="player2 maxHitPoints">
+              
             </div>
-          </div>
+          </div> -->
           <div style="display:flex;justify-content:left">
             <img src="armor.png" style="height: 4vh; width: 4vh;">
-            <div style="display:flex;align-items:center">
-              teste3
+            <div style="display:flex;align-items:center" class="player2 baseArmor">
+              
             </div>
           </div>
           <div style="display:flex;justify-content:left">
             <img src="level-up.png" style="height: 4vh; width: 4vh;">
-            <div style="display:flex;align-items:center">
-              teste3
+            <div style="display:flex;align-items:center" class="player2 levelPlayer2">
+              
             </div>
           </div>
         </div>
