@@ -14,10 +14,8 @@
         let agiPlayer2 = document.getElementsByClassName('player2 agi')[0]
         let intPlayer1 = document.getElementsByClassName('player1 int')[0]
         let intPlayer2 = document.getElementsByClassName('player2 int')[0]
-        let maxHitPointsPlayer1 = document.getElementsByClassName('player1 maxHitPoints')[0]
-        let maxHitPointsPlayer2 = document.getElementsByClassName('player2 maxHitPoints')[0]
-        let hitPointsPlayer1 = document.getElementsByClassName('player1 hitPoints')[0]
-        let hitPointsPlayer2 = document.getElementsByClassName('player2 hitPoints')[0]
+        let hitPointsPlayer1 = document.querySelector('.player1 .hp-label')
+        let hitPointsPlayer2 = document.querySelector('.player2 .hp-label')  
         let maxManaPlayer1 = document.getElementsByClassName('player1 maxMana')[0]
         let maxManaPlayer2 = document.getElementsByClassName('player2 maxMana')[0]
         let manaPlayer1 = document.getElementsByClassName('player1 manaPlayer1')[0]
@@ -30,16 +28,41 @@
         let baseAttackTimePlayer2 = document.getElementsByClassName('player2 baseAttackTime')[0]
         let levelPlayer1 = document.getElementsByClassName('player1 levelPlayer1')[0]
         let levelPlayer2 = document.getElementsByClassName('player2 levelPlayer2')[0]
+        let lifeBarPlayer1 = document.querySelector('.player1 .current-hp')
+        let lifeBarPlayer2 = document.querySelector('.player2 .current-hp')
+        
 
-        const fillFrontData = (hero, playerElements) => {
-
-          
+        const changeHP = (hitpointElements, lifeBarElement, hp, maxhp) => {
+          hitpointElements.innerHTML = hp + " / " + maxhp
+          lifeBarElement.style.width = (hp / maxhp * 100).toFixed(1)+"%"
+        }
+        window.changeHP = changeHP
+        
+        const fillFront = (hero, playerElements) => {          
           playerElements.agi.innerHTML = hero.agi
           playerElements.str.innerHTML = hero.str
           playerElements.int.innerHTML = hero.int
           playerElements.damage.innerHTML = hero.damage
-          playerElements.baseArmor.innerHTML = hero.baseArmor
+          playerElements.baseArmor.innerHTML = `${hero.armor.toFixed(0)} (${(100 - (hero.reduceDamageByArmor * 100)).toFixed(1)}%)`
           playerElements.level.innerHTML = hero.level
+          changeHP(playerElements.hitPoints,playerElements.lifeBar,hero.hitPoints,hero.maxHitPoints)
+          // playerElements.hitPoints.innerHTML = hero.hitPoints + " / " + hero.maxHitPoints
+          // playerElements.lifeBar.style.width = (hero.hitPoints / hero.maxHitPoints * 100).toFixed(1)+"%"
+          
+          
+          // Aqui preencheriamos o hp e mana do heroi no player atual
+          // Precisamos receber o <span class="hp-label" /> que contém o texto da 'vida atual / vida total'
+          // Devemos criar uma string no formato 'vida atual / vida total'
+          // E preencher o span da vida com isso
+          // Depois, precisamos ajustar a barra da vida
+          // Analisamos que para isso basta alterar a prop css 'width' do elemento 
+          // <div class="current-hp" /> o definindo como um percentual
+
+          // Mudar css de elemento
+          // document.getElementById(id).style.property = 'new style'
+          // https://www.w3schools.com/js/js_htmldom_css.asp
+
+
           //playerElements.maxHitPoints.innerHTML = hero.maxHitPoints
           //playerElements.hitPoints.innerHTML = hero.hitPoints
           // playerElements.maxMana.innerHTML = hero.maxMana
@@ -48,17 +71,39 @@
         }
 
         console.log('1')
-        fillFrontData(res.data[0], { agi: agiPlayer1, str: strPlayer1, int: intPlayer1, damage: damagePlayer1, baseArmor: baseArmorPlayer1, level: levelPlayer1 }) //damage: damagePlayer1, baseArmor: baseArmorPlayer1, baseAttackTime: baseAttackTimePlayer1, level: 1}/)
+        fillFront(res.data[0], { 
+          agi: agiPlayer1, 
+          str: strPlayer1, 
+          int: intPlayer1, 
+          damage: damagePlayer1, 
+          baseArmor: baseArmorPlayer1, 
+          level: levelPlayer1,
+          hitPoints: hitPointsPlayer1,
+          lifeBar: lifeBarPlayer1,
+        }) //damage: damagePlayer1, baseArmor: baseArmorPlayer1, baseAttackTime: baseAttackTimePlayer1, level: 1}/)
         
         console.log('2')
-       fillFrontData(res.data[1], { agi: agiPlayer2, str: strPlayer2, int: intPlayer2, damage: damagePlayer2, baseArmor: baseArmorPlayer2, level: levelPlayer2 })//damage: damagePlayer2, baseArmor: baseArmorPlayer2, baseAttackTime: baseAttackTimePlayer2, level: 1})
+        fillFront(res.data[1], { 
+          agi: agiPlayer2, 
+          str: strPlayer2, 
+          int: intPlayer2, 
+          damage: damagePlayer2, 
+          baseArmor: baseArmorPlayer2, 
+          level: levelPlayer2,
+          hitPoints: hitPointsPlayer2,
+          lifeBar: lifeBarPlayer2,
+        })//damage: damagePlayer2, baseArmor: baseArmorPlayer2, baseAttackTime: baseAttackTimePlayer2, level: 1})
 
+        setInterval(() => {
+          const randomHp = Math.floor(Math.random() * 660)
+          changeHP(hitPointsPlayer1, lifeBarPlayer1, randomHp, 660)
+        }, 5000)
 
         //fillFrontData(res.data[1], { agi: agiPlayer2 , str: strPlayer2, int: intPlayer2, maxHitPoints: maxHitPointsPlayer2, hitPoints: hitPointsPlayer2,maxMana: maxManaPlayer2, mana: manaPlayer2,dmg: damagePlayer2, baseArmor: baseArmorPlayer2, baseAttackTime: baseAttackTimePlayer2, level: 1})
         //fillFrontData(res.data[1], { agi: agiPlayer2 })
 
       }).catch((error) => {
-        console.log(error.message)
+        console.error(error)
       });
     });
   </script>
@@ -114,14 +159,14 @@
     border-radius: 10px;
     margin-left: 5.2%;
     margin-right: 0%;
-    position: relative;
+    position: relative;    
   }
 
   .current-mana {
     background-color: blue;
     height: 3vh;
     width: 50%;
-    border-radius: 10px;
+    border-radius: 10px;    
   }
 
   .mana-label {
@@ -150,6 +195,8 @@
     height: 3vh;
     width: 50%;
     border-radius: 10px;
+    transition: width 0.5s;
+    transition-timing-function: ease-out;
   }
 
   .hp-label {
@@ -193,9 +240,10 @@
 
   .bodyCardStyle {
     margin-top: 0.5cm;
-    margin-right: 1cm;
+    /* margin-right: 1cm; */
     margin-bottom: 0cm;
-    margin-left: 1cm;
+    /* margin-left: 1cm; */
+    padding-bottom: 0.2vh;
     border-style: solid;
     border-radius: 10px;
     min-height: 100px;
@@ -247,7 +295,7 @@
   <!--comentário-->
   <div style="display:flex;justify-content:space-around">
     <!--Div mãe-->
-    <div class="father-div-cards reaver">
+    <div class="father-div-cards reaver player1">
       <div class="cardStyle heroesBackgroundColor">
         <!--Div ogre-->
         <img src="ogro.png" class="imgHerosStyle">
@@ -301,7 +349,7 @@
       </div>
     </div>
     <img src="versus_che2.png" width="230vw" height="230vw">
-    <div class="father-div-cards reaver">
+    <div class="father-div-cards reaver player2">
       <div class="cardStyle heroesBackgroundColor">
         <!--Div mars-->
         <img src="mars.png" class="imgHerosStyle">
