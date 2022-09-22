@@ -16,10 +16,14 @@
         let intPlayer2 = document.getElementsByClassName('player2 int')[0]
         let hitPointsPlayer1 = document.querySelector('.player1 .hp-label')
         let hitPointsPlayer2 = document.querySelector('.player2 .hp-label')  
-        let maxManaPlayer1 = document.getElementsByClassName('player1 maxMana')[0]
-        let maxManaPlayer2 = document.getElementsByClassName('player2 maxMana')[0]
-        let manaPlayer1 = document.getElementsByClassName('player1 manaPlayer1')[0]
-        let manaPlayer2 = document.getElementsByClassName('player2 manaPlayer2')[0]
+        let lifeBarPlayer1 = document.querySelector('.player1 .current-hp')
+        let lifeBarPlayer2 = document.querySelector('.player2 .current-hp')
+        let manaBarPlayer1 = document.querySelector('.player1 .current-mana')
+        let manaBarPlayer2 = document.querySelector('.player2 .current-mana')
+        let maxManaPlayer1 = document.querySelector('.player1 .manaStyle')[0]
+        let maxManaPlayer2 = document.querySelector('.player2 .manaStyle')[0]
+        let manaPlayer1 = document.querySelector('.player1 .mana-label')
+        let manaPlayer2 = document.querySelector('.player2 .mana-label')
         let damagePlayer1 = document.getElementsByClassName('player1 damage')[0]
         let damagePlayer2 = document.getElementsByClassName('player2 damage')[0]
         let baseArmorPlayer1 = document.getElementsByClassName('player1 baseArmor')[0]
@@ -28,10 +32,31 @@
         let baseAttackTimePlayer2 = document.getElementsByClassName('player2 baseAttackTime')[0]
         let levelPlayer1 = document.getElementsByClassName('player1 levelPlayer1')[0]
         let levelPlayer2 = document.getElementsByClassName('player2 levelPlayer2')[0]
-        let lifeBarPlayer1 = document.querySelector('.player1 .current-hp')
-        let lifeBarPlayer2 = document.querySelector('.player2 .current-hp')
-        
 
+        
+        const addElement = () => {
+          const logDiv = document.createElement("div")
+        
+          const logContent = document.createTextNode("Tessssssssssste")
+          logDiv.appendChild(logContent)
+          const currentLogDiv = document.getElementById("div1")
+          currentLogDiv.appendChild(logDiv)
+
+        }
+
+      addElement()
+      addElement()
+      addElement()
+      addElement()
+      addElement()
+      addElement()
+      addElement()
+        
+        const changeMana = (manapointElements, manaBarElement, mana, maxMana) => {
+          manapointElements.innerHTML = mana + " / " + maxMana
+          manaBarElement.style.width = (mana / maxMana * 100).toFixed(1)+"%"
+        }
+        
         const changeHP = (hitpointElements, lifeBarElement, hp, maxhp) => {
           hitpointElements.innerHTML = hp + " / " + maxhp
           lifeBarElement.style.width = (hp / maxhp * 100).toFixed(1)+"%"
@@ -46,6 +71,7 @@
           playerElements.baseArmor.innerHTML = `${hero.armor.toFixed(0)} (${(100 - (hero.reduceDamageByArmor * 100)).toFixed(1)}%)`
           playerElements.level.innerHTML = hero.level
           changeHP(playerElements.hitPoints,playerElements.lifeBar,hero.hitPoints,hero.maxHitPoints)
+          changeMana(playerElements.mana,playerElements.manaBar,hero.mana,hero.maxMana)
           // playerElements.hitPoints.innerHTML = hero.hitPoints + " / " + hero.maxHitPoints
           // playerElements.lifeBar.style.width = (hero.hitPoints / hero.maxHitPoints * 100).toFixed(1)+"%"
           
@@ -80,6 +106,8 @@
           level: levelPlayer1,
           hitPoints: hitPointsPlayer1,
           lifeBar: lifeBarPlayer1,
+          mana: manaPlayer1,
+          manaBar: manaBarPlayer1,
         }) //damage: damagePlayer1, baseArmor: baseArmorPlayer1, baseAttackTime: baseAttackTimePlayer1, level: 1}/)
         
         console.log('2')
@@ -92,12 +120,22 @@
           level: levelPlayer2,
           hitPoints: hitPointsPlayer2,
           lifeBar: lifeBarPlayer2,
+          mana: manaPlayer2,
+          manaBar: manaBarPlayer2,
         })//damage: damagePlayer2, baseArmor: baseArmorPlayer2, baseAttackTime: baseAttackTimePlayer2, level: 1})
 
         setInterval(() => {
           const randomHp = Math.floor(Math.random() * 660)
+          const randomManaOgro = Math.floor(Math.random() * 255)
+          const randomManaMars = Math.floor(Math.random() * 327)
           changeHP(hitPointsPlayer1, lifeBarPlayer1, randomHp, 660)
-        }, 5000)
+          changeHP(hitPointsPlayer2, lifeBarPlayer2, randomHp, 660)
+          changeMana(manaPlayer1, manaBarPlayer1, randomManaOgro, 255)
+          changeMana(manaPlayer2, manaBarPlayer2, randomManaMars, 327)
+        }, 5)
+
+
+
 
         //fillFrontData(res.data[1], { agi: agiPlayer2 , str: strPlayer2, int: intPlayer2, maxHitPoints: maxHitPointsPlayer2, hitPoints: hitPointsPlayer2,maxMana: maxManaPlayer2, mana: manaPlayer2,dmg: damagePlayer2, baseArmor: baseArmorPlayer2, baseAttackTime: baseAttackTimePlayer2, level: 1})
         //fillFrontData(res.data[1], { agi: agiPlayer2 })
@@ -166,7 +204,9 @@
     background-color: blue;
     height: 3vh;
     width: 50%;
-    border-radius: 10px;    
+    border-radius: 10px;
+    transition: width 0.5s;
+    transition-timing-function: ease-out;    
   }
 
   .mana-label {
@@ -267,6 +307,7 @@
     background: black;
     overflow-y: scroll;
     margin-bottom: 25px;
+    max-height: 10vh;
   }
 
   .centralized-text {
@@ -408,9 +449,8 @@
     </div>
   </div>
   <div>
-    <div class="logStyle scrollbar" style="color: green;">
-      texto teste para log de combate texto teste para log de combate texto teste para log de combate texto teste para
-      log de combate texto teste para log de combate
+    <div class="logStyle scrollbar" style="color: green;" id="div1">
+      tex
     </div>
   </div>
 
