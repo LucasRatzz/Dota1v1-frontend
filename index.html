@@ -8,6 +8,8 @@
     document.addEventListener("DOMContentLoaded", () => {
       axios.get("http://localhost:3000/heroes").then((res) => {
         console.log(res.data)
+        const hero1 = res.data[0]
+        const hero2 = res.data[1]
         let strPlayer1 = document.getElementsByClassName('player1 str')[0]
         let strPlayer2 = document.getElementsByClassName('player2 str')[0]
         let agiPlayer1 = document.getElementsByClassName('player1 agi')[0]
@@ -34,23 +36,13 @@
         let levelPlayer2 = document.getElementsByClassName('player2 levelPlayer2')[0]
 
         
-        const addElement = () => {
-          const logDiv = document.createElement("div")
-        
-          const logContent = document.createTextNode("Tessssssssssste")
+        const log = (txt) => {
+          const logDiv = document.createElement("div")        
+          const logContent = document.createTextNode(txt)
           logDiv.appendChild(logContent)
-          const currentLogDiv = document.getElementById("div1")
-          currentLogDiv.appendChild(logDiv)
-
+          const currentLogDiv = document.getElementById("logDiv")
+          currentLogDiv.prepend(logDiv)
         }
-
-      addElement()
-      addElement()
-      addElement()
-      addElement()
-      addElement()
-      addElement()
-      addElement()
         
         const changeMana = (manapointElements, manaBarElement, mana, maxMana) => {
           manapointElements.innerHTML = mana + " / " + maxMana
@@ -72,32 +64,9 @@
           playerElements.level.innerHTML = hero.level
           changeHP(playerElements.hitPoints,playerElements.lifeBar,hero.hitPoints,hero.maxHitPoints)
           changeMana(playerElements.mana,playerElements.manaBar,hero.mana,hero.maxMana)
-          // playerElements.hitPoints.innerHTML = hero.hitPoints + " / " + hero.maxHitPoints
-          // playerElements.lifeBar.style.width = (hero.hitPoints / hero.maxHitPoints * 100).toFixed(1)+"%"
-          
-          
-          // Aqui preencheriamos o hp e mana do heroi no player atual
-          // Precisamos receber o <span class="hp-label" /> que contém o texto da 'vida atual / vida total'
-          // Devemos criar uma string no formato 'vida atual / vida total'
-          // E preencher o span da vida com isso
-          // Depois, precisamos ajustar a barra da vida
-          // Analisamos que para isso basta alterar a prop css 'width' do elemento 
-          // <div class="current-hp" /> o definindo como um percentual
-
-          // Mudar css de elemento
-          // document.getElementById(id).style.property = 'new style'
-          // https://www.w3schools.com/js/js_htmldom_css.asp
-
-
-          //playerElements.maxHitPoints.innerHTML = hero.maxHitPoints
-          //playerElements.hitPoints.innerHTML = hero.hitPoints
-          // playerElements.maxMana.innerHTML = hero.maxMana
-          // playerElements.mana.innerHTML = hero.mana
-          // playerElements.baseAttackTime.innerHTML = hero.baseAttackTime
         }
 
-        console.log('1')
-        fillFront(res.data[0], { 
+        fillFront(hero1, { 
           agi: agiPlayer1, 
           str: strPlayer1, 
           int: intPlayer1, 
@@ -108,10 +77,9 @@
           lifeBar: lifeBarPlayer1,
           mana: manaPlayer1,
           manaBar: manaBarPlayer1,
-        }) //damage: damagePlayer1, baseArmor: baseArmorPlayer1, baseAttackTime: baseAttackTimePlayer1, level: 1}/)
+        })
         
-        console.log('2')
-        fillFront(res.data[1], { 
+        fillFront(hero2, { 
           agi: agiPlayer2, 
           str: strPlayer2, 
           int: intPlayer2, 
@@ -122,24 +90,71 @@
           lifeBar: lifeBarPlayer2,
           mana: manaPlayer2,
           manaBar: manaBarPlayer2,
-        })//damage: damagePlayer2, baseArmor: baseArmorPlayer2, baseAttackTime: baseAttackTimePlayer2, level: 1})
+        })
 
-        setInterval(() => {
-          const randomHp = Math.floor(Math.random() * 660)
-          const randomManaOgro = Math.floor(Math.random() * 255)
-          const randomManaMars = Math.floor(Math.random() * 327)
-          changeHP(hitPointsPlayer1, lifeBarPlayer1, randomHp, 660)
-          changeHP(hitPointsPlayer2, lifeBarPlayer2, randomHp, 660)
-          changeMana(manaPlayer1, manaBarPlayer1, randomManaOgro, 255)
-          changeMana(manaPlayer2, manaBarPlayer2, randomManaMars, 327)
-        }, 5)
+        /* Criar uma função para interromper a batalha
+        Essa função não deve receber params e deve
+        interromper ambos ataques usando clearInterval
+        ---
+        Melhorar lógica de redução de dano para não permitir hp negativo
+        ---
+        Quando algum heroi morrer chamamos a função criada anteriormente
+        */
+        const firstHeroAttack = setInterval(() => {
+          let calculateDamage = parseInt((hero1.damage * hero2.reduceDamageByArmor).toFixed(0))
+          const originalHp = hero2.hitPoints
+          hero2.hitPoints -= calculateDamage
+            if(hero2.hitPoints < 0) {
+              hero2.hitPoints = 0
+            }
+            
+            log(`${hero1.name} caused ${calculateDamage} to ${hero2.name}. ` +
+            `Hp decreased from ${originalHp} to ${hero2.hitPoints}`)
+            
+            if (hero2.hitPoints == 0) {
+              stopBattle()
+              log(`${hero2.name} has died`)
+            }
+            
+          changeHP(hitPointsPlayer2,lifeBarPlayer2,hero2.hitPoints,hero2.maxHitPoints)
+        
+        }, 100/hero1.attackPerSecond)
 
+        const secondHeroAttack = setInterval(() => {
+          let calculateDamage = parseInt((hero2.damage * hero1.reduceDamageByArmor).toFixed(0))
+          const originalHp = hero1.hitPoints
+          hero1.hitPoints -= calculateDamage
+          if(hero1.hitPoints <= 0) {
+            hero1.hitPoints = 0
+            stopBattle()
+            log(`${hero2.name} caused ${calculateDamage} to ${hero1.name}. ` +
+              `Hp decreased from ${originalHp} to ${hero1.hitPoints}`)
+            log(`${hero1.name} has died`)
+            changeHP(hitPointsPlayer1,lifeBarPlayer1,hero1.hitPoints,hero1.maxHitPoints)
+            return 
+          }
+          log(`${hero2.name} caused ${calculateDamage} to ${hero1.name}. ` +
+            `Hp decreased from ${originalHp} to ${hero1.hitPoints}`)
 
+          changeHP(hitPointsPlayer1,lifeBarPlayer1,hero1.hitPoints,hero1.maxHitPoints)
+          
+        }, 100/hero2.attackPerSecond)
 
-
-        //fillFrontData(res.data[1], { agi: agiPlayer2 , str: strPlayer2, int: intPlayer2, maxHitPoints: maxHitPointsPlayer2, hitPoints: hitPointsPlayer2,maxMana: maxManaPlayer2, mana: manaPlayer2,dmg: damagePlayer2, baseArmor: baseArmorPlayer2, baseAttackTime: baseAttackTimePlayer2, level: 1})
-        //fillFrontData(res.data[1], { agi: agiPlayer2 })
-
+        const stopBattle = () => {
+          clearInterval(firstHeroAttack)
+          clearInterval(secondHeroAttack)
+          
+        }
+        
+        // setInterval(() => {
+        //   const randomHp = Math.floor(Math.random() * 660)
+        //   const randomManaOgro = Math.floor(Math.random() * 255)
+        //   const randomManaMars = Math.floor(Math.random() * 327)
+        //   changeHP(hitPointsPlayer1, lifeBarPlayer1, randomHp, 660)
+        //   changeHP(hitPointsPlayer2, lifeBarPlayer2, randomHp, 660)
+        //   changeMana(manaPlayer1, manaBarPlayer1, randomManaOgro, 255)
+        //   changeMana(manaPlayer2, manaBarPlayer2, randomManaMars, 327)
+        // }, 5)
       }).catch((error) => {
         console.error(error)
       });
@@ -300,6 +315,7 @@
   }
 
   .scrollbar {
+    display: flex;
     margin-left: 4.2%;
     float: left;
     height: 100%;
@@ -308,6 +324,8 @@
     overflow-y: scroll;
     margin-bottom: 25px;
     max-height: 10vh;
+    display: flex;
+    flex-direction: column-reverse;
   }
 
   .centralized-text {
@@ -449,8 +467,8 @@
     </div>
   </div>
   <div>
-    <div class="logStyle scrollbar" style="color: green;" id="div1">
-      tex
+    <div class="logStyle scrollbar" style="color: green;" id="logDiv">
+      
     </div>
   </div>
 
