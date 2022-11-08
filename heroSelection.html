@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script>
+        let arrayAgi = []
+        let arrayStr = []
+        let arrayInt = []
+
+
+        document.addEventListener("DOMContentLoaded",() => {
+            axios.get("http://localhost:3000/heroes").then((res)=>{
+                let allHeroes = res.data
+                for (let i = 0; i< allHeroes.length; i++) {
+                  if (allHeroes[i].mainAttribute == "str") {
+                      arrayStr.push(allHeroes[i])
+                  }else if (allHeroes[i].mainAttribute == "agi") {
+                      arrayAgi.push(allHeroes[i])                
+                  }else if (allHeroes[i].mainAttribute == "int") {
+                      arrayInt.push(allHeroes[i])
+                  }
+                }
+                let agiGroupHeroe = document.getElementById("agi")
+                let strGroupHeroe = document.getElementById("str")
+                let intGroupHeroe = document.getElementById("int")
+                for (let i = 0; i< arrayAgi.length; i++){
+                    const heroiAtual = arrayAgi[i]
+                    let agiHeroCard = document.createElement("div")
+                    agiHeroCard.innerText = heroiAtual.name
+                    agiGroupHeroe.appendChild(agiHeroCard)
+                } 
+                for (let i = 0; i< arrayStr.length; i++){
+                    const heroiAtual = arrayStr[i]
+                    let strHeroCard = document.createElement("div")
+                    strHeroCard.innerText = heroiAtual.name
+                    strGroupHeroe.appendChild(strHeroCard)
+                } 
+                for (let i = 0; i< arrayInt.length; i++){
+                    const heroiAtual = arrayInt[i]
+                    let intHeroCard = document.createElement("div")
+                    intHeroCard.innerText = heroiAtual.name
+                    intGroupHeroe.appendChild(intHeroCard)
+                }
+                console.log(arrayStr)
+                console.log(arrayInt)
+                console.log(arrayAgi)                
+                          
+            }).catch()
+        })
+    </script>
+    <title>DOTA 1 V 1</title>
+    <style>
+      .background {
+        background-image: url("background.jpg");
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        height: 100vh;
+        width: 100vw;
+        margin: 0;
+      }
+
+      .hero-groups-container {
+        display:flex;
+        flex-direction: column;
+        height:50vh ;
+        width:100vw ;                
+      }
+
+      .hero-group {
+        display:flex;
+        flex-direction:row;
+        height:30vh;
+        width:100vw;
+        flex-wrap: wrap;
+      }
+
+      .background::before {
+        z-index: -1;
+        content: "";
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        bottom: 0px;
+        left: 0px;
+        background-color: rgba(0, 0, 0, 0.25);
+        pointer-events: none;
+      }
+
+      @font-face {
+        font-family: "Reaver";
+        src: url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/Reaver-Regular.woff")
+            format("woff"),
+          url("https://cdn.cloudflare.steamstatic.com/apps/dota2/fonts/Reaver-Regular.ttf")
+            format("truetype");
+        font-weight: 400;
+        font-style: normal;
+      }
+      
+      .centralized-text {
+        text-align: center;
+      }
+      .white-text {
+        color: white;
+      }
+
+      .reaver {
+        font-family: "Reaver";
+      }
+    </style>
+  </head>
+
+  <body class="background">
+    <div style="display: flex; justify-content: center">
+      <!--Titulo-->
+      <h1 class="reaver centralized-text white-text" style="font-size: 225%">
+        D O T A <br />
+        1 VS 1
+      </h1>
+    </div>
+
+    <div class="hero-groups-container white-text">
+
+        <div class = "hero-group " id="str">
+        
+            
+        </div>
+        <div class = "hero-group " id="agi">
+
+        </div>
+        <div class = "hero-group " id="int">
+
+        </div>
+
+    </div>
+  </body>
+</html>
