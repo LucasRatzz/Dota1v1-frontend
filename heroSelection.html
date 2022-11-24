@@ -25,21 +25,43 @@
                 let intGroupHeroe = document.getElementById("int")
                 for (let i = 0; i< arrayAgi.length; i++){
                     const heroiAtual = arrayAgi[i]
+                    const heroiAtualImg = heroiAtual.urlImg
                     let agiHeroCard = document.createElement("div")
-                    agiHeroCard.innerText = heroiAtual.name
+                    let agiHeroImg = document.createElement("img")
+                    let agiHeroName = document.createElement("div")
+                    agiHeroImg.src = heroiAtualImg
+                    agiHeroImg.classList.add("heroPortrait")       
+                    agiHeroName.textContent = heroiAtual.name
                     agiGroupHeroe.appendChild(agiHeroCard)
+                    agiHeroCard.appendChild(agiHeroName)
+                    agiHeroCard.appendChild(agiHeroImg)
+
+                  //position:absolut na div com agiHeroName
+                  //bottom:0px
+                  //  <img class="" src="">
+                  //   nome do heroi
+                  //  </img>
+
                 } 
                 for (let i = 0; i< arrayStr.length; i++){
                     const heroiAtual = arrayStr[i]
+                    const heroiAtualImg = heroiAtual.urlImg
                     let strHeroCard = document.createElement("div")
+                    let strHeroImg = document.createElement("img")
+                    strHeroImg.src = heroiAtualImg
+                    strHeroImg.classList.add("heroPortrait")
                     strHeroCard.innerText = heroiAtual.name
-                    strGroupHeroe.appendChild(strHeroCard)
+                    strGroupHeroe.appendChild(strHeroImg)
                 } 
                 for (let i = 0; i< arrayInt.length; i++){
                     const heroiAtual = arrayInt[i]
+                    const heroiAtualImg = heroiAtual.urlImg
                     let intHeroCard = document.createElement("div")
+                    let intHeroImg = document.createElement("img")
+                    intHeroImg.src = heroiAtualImg
+                    intHeroImg.classList.add("heroPortrait")
                     intHeroCard.innerText = heroiAtual.name
-                    intGroupHeroe.appendChild(intHeroCard)
+                    intGroupHeroe.appendChild(intHeroImg)
                 }
                 console.log(arrayStr)
                 console.log(arrayInt)
@@ -107,6 +129,17 @@
       .reaver {
         font-family: "Reaver";
       }
+
+      .heroPortrait {
+        height: 6vh;
+        width: 4vw
+      }
+
+      .heroPortrait:hover {
+        height: 8vh;
+        width: 6vw;
+        transition: width 1s, height 1s;
+      }
     </style>
   </head>
 
@@ -120,7 +153,6 @@
     </div>
 
     <div class="hero-groups-container white-text">
-
         <div class = "hero-group " id="str">
         
             

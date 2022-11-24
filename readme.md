@@ -40,3 +40,8 @@ Para servir localmente o site execute `npm run start:local`
     - Bloquearemos a tela para mais ações e ofereceremos dois botões
       - Batalhar
       - Resetar
+  - Trocar para imagem da nova api
+    - Que tem animação tbm https://rapidapi.com/snldnc-kpCtDKbxo_F/api/dota2-heroes/
+
+- Aula amanhã:
+  - Ajustar o tamanho da div agiHeroCard de acordo com a imagem pra crescerem juntos.
