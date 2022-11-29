@@ -24,18 +24,24 @@
                 let strGroupHeroe = document.getElementById("str")
                 let intGroupHeroe = document.getElementById("int")
                 for (let i = 0; i< arrayAgi.length; i++){
-                    const heroiAtual = arrayAgi[i]
-                    const heroiAtualImg = heroiAtual.urlImg
-                    let agiHeroCard = document.createElement("div")
-                    let agiHeroImg = document.createElement("img")
-                    let agiHeroName = document.createElement("div")
-                    agiHeroImg.src = heroiAtualImg
-                    agiHeroImg.classList.add("heroPortrait")       
-                    agiHeroName.textContent = heroiAtual.name
-                    agiGroupHeroe.appendChild(agiHeroCard)
-                    agiHeroCard.appendChild(agiHeroName)
-                    agiHeroCard.appendChild(agiHeroImg)
-
+                  const heroiAtual = arrayAgi[i]
+                  const heroiAtualImg = heroiAtual.urlImg
+                  let agiHeroCard = document.createElement("div")
+                  let agiHeroImg = document.createElement("div") // div style.background(urlimg)>relative... appendchild(heroname)>absolut 
+                  let agiHeroName = document.createElement("div")
+                  agiHeroImg.style.backgroundImage = "url('" + heroiAtualImg + "')"
+                  agiHeroImg.classList.add("heroImgCover")
+                  // agiHeroImg.style.color = 'white'
+                  agiHeroImg.src = heroiAtualImg
+                  agiHeroImg.classList.add("heroPortrait")       
+                  agiHeroName.textContent = heroiAtual.name
+                  agiHeroName.classList.add("heroName")
+                  agiHeroCard.appendChild(agiHeroImg)
+                  agiHeroImg.appendChild(agiHeroName)
+                  agiGroupHeroe.appendChild(agiHeroCard)
+                    //agiheroimg.style.backgroundImage = "url('URL')|none|initial|inherit"
+                  // 1º trnasformar a tag img em uma tag de div, e background com url da imagem
+                  // 2º div do tamanho da img, pai da img, e a img e a div crescem juntos, texto como filho da div que vai ser absoluta
                   //position:absolut na div com agiHeroName
                   //bottom:0px
                   //  <img class="" src="">
@@ -47,21 +53,33 @@
                     const heroiAtual = arrayStr[i]
                     const heroiAtualImg = heroiAtual.urlImg
                     let strHeroCard = document.createElement("div")
-                    let strHeroImg = document.createElement("img")
+                    let strHeroImg = document.createElement("div")
+                    let strHeroName = document.createElement("div")
+                    strHeroImg.style.backgroundImage = "url('" + heroiAtualImg + "')"
+                    strHeroImg.classList.add("heroImgCover") 
                     strHeroImg.src = heroiAtualImg
                     strHeroImg.classList.add("heroPortrait")
-                    strHeroCard.innerText = heroiAtual.name
-                    strGroupHeroe.appendChild(strHeroImg)
-                } 
-                for (let i = 0; i< arrayInt.length; i++){
+                    strHeroName.textContent = heroiAtual.name
+                    strHeroName.classList.add("heroName")
+                    strHeroCard.appendChild(strHeroImg)
+                    strHeroImg.appendChild(strHeroName)
+                    strGroupHeroe.appendChild(strHeroCard)
+                  } 
+                  for (let i = 0; i< arrayInt.length; i++){
                     const heroiAtual = arrayInt[i]
                     const heroiAtualImg = heroiAtual.urlImg
                     let intHeroCard = document.createElement("div")
-                    let intHeroImg = document.createElement("img")
+                    let intHeroImg = document.createElement("div")
+                    let intHeroName = document.createElement("div")
+                    intHeroImg.style.backgroundImage = "url('" + heroiAtualImg + "')"
+                    intHeroImg.classList.add("heroImgCover") 
                     intHeroImg.src = heroiAtualImg
                     intHeroImg.classList.add("heroPortrait")
-                    intHeroCard.innerText = heroiAtual.name
-                    intGroupHeroe.appendChild(intHeroImg)
+                    intHeroName.textContent = heroiAtual.name
+                    intHeroName.classList.add("heroName")
+                    intHeroCard.appendChild(intHeroImg)
+                    intHeroImg.appendChild(intHeroName)
+                    intGroupHeroe.appendChild(intHeroCard)
                 }
                 console.log(arrayStr)
                 console.log(arrayInt)
@@ -131,15 +149,42 @@
       }
 
       .heroPortrait {
+        
+        position: relative;
         height: 6vh;
         width: 4vw
       }
 
-      .heroPortrait:hover {
+      .heroPortrait:hover {                   
         height: 8vh;
         width: 6vw;
         transition: width 1s, height 1s;
       }
+
+      .heroPortrait:hover .heroName {             
+        /* visibility: visible; */
+        opacity: 1;
+        transition: opacity 1.5s;
+      }
+
+      .heroImgCover { 
+        
+        background-size: cover;
+        background-position: center ;
+      } 
+
+      .heroName { 
+        opacity: 0;
+        /* visibility: hidden; */
+        position:absolute;
+        bottom: 0px;
+        right: 0px;
+      }
+
+
+    
+
+
     </style>
   </head>
 

@@ -30,8 +30,13 @@ Para servir localmente o site execute `npm run start:local`
     - agrupar herois por atributo
       - Mudar o backend para ter o atributo do heroi (ok)
       - Agrupar no front pelo atributo (ok)
-    - para cada grupo de herois vamos mostrar uma linha com os nomes dos herois
-      - No futuro vamos substituir por imagens
+    - para cada grupo de herois vamos mostrar uma linha com os nomes dos herois (ok)
+      - No futuro vamos substituir por imagens (ok)
+      - Colocar o nome do heroi na parte de inferior direita da imagem
+        - Nome deve acompanhar a posição inferior direita ao expandir o ícone
+        - Nome não deve aparecer enquanto o mousehover for acionado
+      - Aplicar alterações de ícones p/ todos hérois
+      - Substituir as imagens quebradas (ok)
   - como funciona o pick:
     - Ao passar o mouse em cima do heroi, a caixa dele deve aumentar de tamanho e sobrepor as outras
     - Ao clicar no heroi aumentado deve haver um popup de confirmação do heroi para o player x
@@ -45,3 +50,11 @@ Para servir localmente o site execute `npm run start:local`
 
 - Aula amanhã:
   - Ajustar o tamanho da div agiHeroCard de acordo com a imagem pra crescerem juntos.
+- P/ aula 30.11:
+  - Ajustar quebra do nome do heroi.
+  - Retratos poderiam ser maiores.
+  - Disposição dos atributos na vertical em vez de horizontal.
+  - Colocar imagem dos atributos por heroGroup (pensar onde posicionar)
+  - Ajustar a margem da heroPortrait
+  - Ajustar distancias entre heroGroups
+  
