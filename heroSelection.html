@@ -25,19 +25,19 @@
                 let intGroupHeroe = document.getElementById("int")
                 for (let i = 0; i< arrayAgi.length; i++){
                   const heroiAtual = arrayAgi[i]
-                  const heroiAtualImg = heroiAtual.urlImg
+                  const heroiAtualImg = heroiAtual.urlImg                  
                   let agiHeroCard = document.createElement("div")
                   let agiHeroImg = document.createElement("div") // div style.background(urlimg)>relative... appendchild(heroname)>absolut 
-                  let agiHeroName = document.createElement("div")
+                  let agiHeroName = document.createElement("div")                  
                   agiHeroImg.style.backgroundImage = "url('" + heroiAtualImg + "')"
-                  agiHeroImg.classList.add("heroImgCover")
+                  agiHeroImg.classList.add("heroImgCover")                  
                   // agiHeroImg.style.color = 'white'
                   agiHeroImg.src = heroiAtualImg
                   agiHeroImg.classList.add("heroPortrait")       
                   agiHeroName.textContent = heroiAtual.name
                   agiHeroName.classList.add("heroName")
                   agiHeroCard.appendChild(agiHeroImg)
-                  agiHeroImg.appendChild(agiHeroName)
+                  agiHeroImg.appendChild(agiHeroName)                  
                   agiGroupHeroe.appendChild(agiHeroCard)
                     //agiheroimg.style.backgroundImage = "url('URL')|none|initial|inherit"
                   // 1º trnasformar a tag img em uma tag de div, e background com url da imagem
@@ -65,6 +65,7 @@
                     strHeroImg.appendChild(strHeroName)
                     strGroupHeroe.appendChild(strHeroCard)
                   } 
+
                   for (let i = 0; i< arrayInt.length; i++){
                     const heroiAtual = arrayInt[i]
                     const heroiAtualImg = heroiAtual.urlImg
@@ -104,7 +105,8 @@
         display:flex;
         flex-direction: column;
         height:50vh ;
-        width:100vw ;                
+        width:100vw ;
+                                
       }
 
       .hero-group {
@@ -113,6 +115,11 @@
         height:30vh;
         width:100vw;
         flex-wrap: wrap;
+        margin-left: 30px;
+        
+        align-content: space-around;   
+        margin-top: 15px;      
+                   
       }
 
       .background::before {
@@ -151,13 +158,16 @@
       .heroPortrait {
         
         position: relative;
-        height: 6vh;
-        width: 4vw
+        height: 8vh;
+        width: 6vw;
+        margin-left: 7px;
+        margin-top: 7px;
+
       }
 
       .heroPortrait:hover {                   
-        height: 8vh;
-        width: 6vw;
+        height: 10vh;
+        width: 8vw;
         transition: width 1s, height 1s;
       }
 
@@ -179,6 +189,12 @@
         position:absolute;
         bottom: 0px;
         right: 0px;
+      }
+
+      .heroAttributeImg {
+        position: absolute;
+        bottom: 0px;
+        right: 2%;
       }
 
 

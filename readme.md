@@ -51,10 +51,11 @@ Para servir localmente o site execute `npm run start:local`
 - Aula amanhã:
   - Ajustar o tamanho da div agiHeroCard de acordo com a imagem pra crescerem juntos.
 - P/ aula 30.11:
-  - Ajustar quebra do nome do heroi.
-  - Retratos poderiam ser maiores.
-  - Disposição dos atributos na vertical em vez de horizontal.
+  - Ajustar quebra do nome do heroi. (quando nome é grande) o/k
+  - Adicionar margem ao lados dos grupos
+  - Retratos poderiam ser maiores. ok
+  
   - Colocar imagem dos atributos por heroGroup (pensar onde posicionar)
-  - Ajustar a margem da heroPortrait
-  - Ajustar distancias entre heroGroups
+  - Ajustar a margem da heroPortrait ok
+  - Ajustar distancias entre heroGroups ok
   
