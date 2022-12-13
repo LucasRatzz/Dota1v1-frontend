@@ -11,6 +11,7 @@
         document.addEventListener("DOMContentLoaded",() => {
             axios.get("http://localhost:3000/heroes").then((res)=>{
                 let allHeroes = res.data
+                
                 for (let i = 0; i< allHeroes.length; i++) {
                   if (allHeroes[i].mainAttribute == "str") {
                       arrayStr.push(allHeroes[i])
@@ -24,20 +25,23 @@
                 let strGroupHeroe = document.getElementById("str")
                 let intGroupHeroe = document.getElementById("int")
                 for (let i = 0; i< arrayAgi.length; i++){
-                  const heroiAtual = arrayAgi[i]
-                  const heroiAtualImg = heroiAtual.urlImg                  
+                  const heroiAtual = arrayAgi[i] 
+                  const heroiAtualImg = heroiAtual.urlImg
+                  const heroiAtualAttImg = heroiAtual.attributeImg                  
                   let agiHeroCard = document.createElement("div")
                   let agiHeroImg = document.createElement("div") // div style.background(urlimg)>relative... appendchild(heroname)>absolut 
-                  let agiHeroName = document.createElement("div")                  
+                  let agiHeroName = document.createElement("div")  
+                  let agiHeroAttribute = document.createElement("img")                
                   agiHeroImg.style.backgroundImage = "url('" + heroiAtualImg + "')"
-                  agiHeroImg.classList.add("heroImgCover")                  
-                  // agiHeroImg.style.color = 'white'
-                  agiHeroImg.src = heroiAtualImg
-                  agiHeroImg.classList.add("heroPortrait")       
-                  agiHeroName.textContent = heroiAtual.name
+                  agiHeroAttribute.src = heroiAtualAttImg
+                  agiHeroAttribute.classList.add("heroAttributeImg")
+                  agiHeroImg.classList.add("heroImgCover","heroPortrait")                  
+                  agiHeroImg.src = heroiAtualImg    
                   agiHeroName.classList.add("heroName")
+                  agiHeroName.textContent = heroiAtual.name
                   agiHeroCard.appendChild(agiHeroImg)
-                  agiHeroImg.appendChild(agiHeroName)                  
+                  agiHeroImg.appendChild(agiHeroName)
+                  agiHeroName.appendChild(agiHeroAttribute)                  
                   agiGroupHeroe.appendChild(agiHeroCard)
                     //agiheroimg.style.backgroundImage = "url('URL')|none|initial|inherit"
                   // 1º trnasformar a tag img em uma tag de div, e background com url da imagem
@@ -47,39 +51,47 @@
                   //  <img class="" src="">
                   //   nome do heroi
                   //  </img>
-
+                  
                 } 
                 for (let i = 0; i< arrayStr.length; i++){
                     const heroiAtual = arrayStr[i]
                     const heroiAtualImg = heroiAtual.urlImg
+                    const heroiAtualAttImg = heroiAtual.attributeImg
                     let strHeroCard = document.createElement("div")
                     let strHeroImg = document.createElement("div")
                     let strHeroName = document.createElement("div")
+                    let strHeroAttribute = document.createElement("img")
                     strHeroImg.style.backgroundImage = "url('" + heroiAtualImg + "')"
-                    strHeroImg.classList.add("heroImgCover") 
+                    strHeroAttribute.src = heroiAtualAttImg
+                    strHeroAttribute.classList.add("heroAttributeImg")
+                    strHeroImg.classList.add("heroImgCover", "heroPortrait")  
                     strHeroImg.src = heroiAtualImg
-                    strHeroImg.classList.add("heroPortrait")
                     strHeroName.textContent = heroiAtual.name
                     strHeroName.classList.add("heroName")
                     strHeroCard.appendChild(strHeroImg)
                     strHeroImg.appendChild(strHeroName)
+                    strHeroName.appendChild(strHeroAttribute)
                     strGroupHeroe.appendChild(strHeroCard)
                   } 
 
                   for (let i = 0; i< arrayInt.length; i++){
                     const heroiAtual = arrayInt[i]
                     const heroiAtualImg = heroiAtual.urlImg
+                    const heroiAtualAttImg = heroiAtual.attributeImg
                     let intHeroCard = document.createElement("div")
                     let intHeroImg = document.createElement("div")
                     let intHeroName = document.createElement("div")
+                    let intHeroAttribute = document.createElement("img")
                     intHeroImg.style.backgroundImage = "url('" + heroiAtualImg + "')"
-                    intHeroImg.classList.add("heroImgCover") 
+                    intHeroAttribute.src = heroiAtualAttImg
+                    intHeroAttribute.classList.add("heroAttributeImg")
+                    intHeroImg.classList.add("heroImgCover","heroPortrait") 
                     intHeroImg.src = heroiAtualImg
-                    intHeroImg.classList.add("heroPortrait")
                     intHeroName.textContent = heroiAtual.name
                     intHeroName.classList.add("heroName")
                     intHeroCard.appendChild(intHeroImg)
                     intHeroImg.appendChild(intHeroName)
+                    intHeroName.appendChild(intHeroAttribute)
                     intGroupHeroe.appendChild(intHeroCard)
                 }
                 console.log(arrayStr)
@@ -184,6 +196,8 @@
       } 
 
       .heroName { 
+        display: flex;
+        flex-wrap: nowrap;
         opacity: 0;
         /* visibility: hidden; */
         position:absolute;
@@ -192,9 +206,10 @@
       }
 
       .heroAttributeImg {
-        position: absolute;
-        bottom: 0px;
-        right: 2%;
+        position: relative;
+        width: 1vw;
+        height:  2vh;
+        
       }
 
 

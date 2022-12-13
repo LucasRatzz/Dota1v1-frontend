@@ -59,3 +59,4 @@ Para servir localmente o site execute `npm run start:local`
   - Ajustar a margem da heroPortrait ok
   - Ajustar distancias entre heroGroups ok
   
+  - Colocar o atributo na primeira posição da Div, EX: AtributoAgi,Antimage,Bloodseeker. 
