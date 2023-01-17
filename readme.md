@@ -60,3 +60,10 @@ Para servir localmente o site execute `npm run start:local`
   - Ajustar distancias entre heroGroups ok
   
   - Colocar o atributo na primeira posição da Div, EX: AtributoAgi,Antimage,Bloodseeker. 
+
+- 09.01
+  - Selecionar 2 herois
+    - 
+  - Popup confirmando o duelo
+
+  - Troca para tela da batalha

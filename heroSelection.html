@@ -3,103 +3,129 @@
   <head>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script>
-        let arrayAgi = []
-        let arrayStr = []
-        let arrayInt = []
+      let arrayAgi = [];
+      let arrayStr = [];
+      let arrayInt = [];
+      let duelHereosSelect = [];
 
+      let chooseAHero = (e) => {
+        if (duelHereosSelect.length < 2) {
+          let heroName = document
+            .getElementById(e.target.id)
+            .classList.add("heroPortrait2");
+          duelHereosSelect.push(heroName);
+        }
 
-        document.addEventListener("DOMContentLoaded",() => {
-            axios.get("http://localhost:3000/heroes").then((res)=>{
-                let allHeroes = res.data
-                
-                for (let i = 0; i< allHeroes.length; i++) {
-                  if (allHeroes[i].mainAttribute == "str") {
-                      arrayStr.push(allHeroes[i])
-                  }else if (allHeroes[i].mainAttribute == "agi") {
-                      arrayAgi.push(allHeroes[i])                
-                  }else if (allHeroes[i].mainAttribute == "int") {
-                      arrayInt.push(allHeroes[i])
-                  }
-                }
-                let agiGroupHeroe = document.getElementById("agi")
-                let strGroupHeroe = document.getElementById("str")
-                let intGroupHeroe = document.getElementById("int")
-                for (let i = 0; i< arrayAgi.length; i++){
-                  const heroiAtual = arrayAgi[i] 
-                  const heroiAtualImg = heroiAtual.urlImg
-                  const heroiAtualAttImg = heroiAtual.attributeImg                  
-                  let agiHeroCard = document.createElement("div")
-                  let agiHeroImg = document.createElement("div") // div style.background(urlimg)>relative... appendchild(heroname)>absolut 
-                  let agiHeroName = document.createElement("div")  
-                  let agiHeroAttribute = document.createElement("img")                
-                  agiHeroImg.style.backgroundImage = "url('" + heroiAtualImg + "')"
-                  agiHeroAttribute.src = heroiAtualAttImg
-                  agiHeroAttribute.classList.add("heroAttributeImg")
-                  agiHeroImg.classList.add("heroImgCover","heroPortrait")                  
-                  agiHeroImg.src = heroiAtualImg    
-                  agiHeroName.classList.add("heroName")
-                  agiHeroName.textContent = heroiAtual.name
-                  agiHeroCard.appendChild(agiHeroImg)
-                  agiHeroImg.appendChild(agiHeroName)
-                  agiHeroName.appendChild(agiHeroAttribute)                  
-                  agiGroupHeroe.appendChild(agiHeroCard)
-                    //agiheroimg.style.backgroundImage = "url('URL')|none|initial|inherit"
-                  // 1º trnasformar a tag img em uma tag de div, e background com url da imagem
-                  // 2º div do tamanho da img, pai da img, e a img e a div crescem juntos, texto como filho da div que vai ser absoluta
-                  //position:absolut na div com agiHeroName
-                  //bottom:0px
-                  //  <img class="" src="">
-                  //   nome do heroi
-                  //  </img>
-                  
-                } 
-                for (let i = 0; i< arrayStr.length; i++){
-                    const heroiAtual = arrayStr[i]
-                    const heroiAtualImg = heroiAtual.urlImg
-                    const heroiAtualAttImg = heroiAtual.attributeImg
-                    let strHeroCard = document.createElement("div")
-                    let strHeroImg = document.createElement("div")
-                    let strHeroName = document.createElement("div")
-                    let strHeroAttribute = document.createElement("img")
-                    strHeroImg.style.backgroundImage = "url('" + heroiAtualImg + "')"
-                    strHeroAttribute.src = heroiAtualAttImg
-                    strHeroAttribute.classList.add("heroAttributeImg")
-                    strHeroImg.classList.add("heroImgCover", "heroPortrait")  
-                    strHeroImg.src = heroiAtualImg
-                    strHeroName.textContent = heroiAtual.name
-                    strHeroName.classList.add("heroName")
-                    strHeroCard.appendChild(strHeroImg)
-                    strHeroImg.appendChild(strHeroName)
-                    strHeroName.appendChild(strHeroAttribute)
-                    strGroupHeroe.appendChild(strHeroCard)
-                  } 
+        if (duelHereosSelect.length == 2) {
+          // lógica da janela de confirmacao
+        }
+        // verificar array de herois selecionados
+        // se houver 0, adiciona novo heroi
+        // se houver 1, adiciona novo heroi e mostra popup
+        // se houver 2, não seleciona
+        console.log(e);
+      };
+      console.log(duelHereosSelect);
+      document.addEventListener("DOMContentLoaded", () => {
+        axios
+          .get("http://localhost:3000/heroes")
+          .then((res) => {
+            let allHeroes = res.data;
 
-                  for (let i = 0; i< arrayInt.length; i++){
-                    const heroiAtual = arrayInt[i]
-                    const heroiAtualImg = heroiAtual.urlImg
-                    const heroiAtualAttImg = heroiAtual.attributeImg
-                    let intHeroCard = document.createElement("div")
-                    let intHeroImg = document.createElement("div")
-                    let intHeroName = document.createElement("div")
-                    let intHeroAttribute = document.createElement("img")
-                    intHeroImg.style.backgroundImage = "url('" + heroiAtualImg + "')"
-                    intHeroAttribute.src = heroiAtualAttImg
-                    intHeroAttribute.classList.add("heroAttributeImg")
-                    intHeroImg.classList.add("heroImgCover","heroPortrait") 
-                    intHeroImg.src = heroiAtualImg
-                    intHeroName.textContent = heroiAtual.name
-                    intHeroName.classList.add("heroName")
-                    intHeroCard.appendChild(intHeroImg)
-                    intHeroImg.appendChild(intHeroName)
-                    intHeroName.appendChild(intHeroAttribute)
-                    intGroupHeroe.appendChild(intHeroCard)
-                }
-                console.log(arrayStr)
-                console.log(arrayInt)
-                console.log(arrayAgi)                
-                          
-            }).catch()
-        })
+            for (let i = 0; i < allHeroes.length; i++) {
+              if (allHeroes[i].mainAttribute == "str") {
+                arrayStr.push(allHeroes[i]);
+              } else if (allHeroes[i].mainAttribute == "agi") {
+                arrayAgi.push(allHeroes[i]);
+              } else if (allHeroes[i].mainAttribute == "int") {
+                arrayInt.push(allHeroes[i]);
+              }
+            }
+            let agiGroupHeroe = document.getElementById("agi");
+            let strGroupHeroe = document.getElementById("str");
+            let intGroupHeroe = document.getElementById("int");
+
+            for (let i = 0; i < arrayAgi.length; i++) {
+              const heroiAtual = arrayAgi[i];
+              const heroiAtualImg = heroiAtual.urlImg;
+              const heroiAtualAttImg = heroiAtual.attributeImg;
+              let agiHeroCard = document.createElement("div");
+              let agiHeroImg = document.createElement("div"); // div style.background(urlimg)>relative... appendchild(heroname)>absolut
+              let agiHeroName = document.createElement("div");
+              let agiHeroAttribute = document.createElement("img");
+              agiHeroImg.style.backgroundImage = "url('" + heroiAtualImg + "')";
+              agiHeroAttribute.src = heroiAtualAttImg;
+              agiHeroAttribute.classList.add("heroAttributeImg");
+              agiHeroImg.classList.add("heroImgCover", "heroPortrait");
+              agiHeroImg.src = heroiAtualImg;
+              agiHeroImg.setAttribute("id", heroiAtual.name);
+              agiHeroName.textContent = heroiAtual.name;
+              agiHeroImg.setAttribute("onclick", "chooseAHero(event)");
+              agiHeroName.classList.add("heroName");
+              agiHeroCard.appendChild(agiHeroImg);
+              agiHeroImg.appendChild(agiHeroName);
+              agiHeroName.appendChild(agiHeroAttribute);
+              agiGroupHeroe.appendChild(agiHeroCard);
+              //agiheroimg.style.backgroundImage = "url('URL')|none|initial|inherit"
+              // 1º trnasformar a tag img em uma tag de div, e background com url da imagem
+              // 2º div do tamanho da img, pai da img, e a img e a div crescem juntos, texto como filho da div que vai ser absoluta
+              //position:absolut na div com agiHeroName
+              //bottom:0px
+              //  <img class="" src="">
+              //   nome do heroi
+              //  </img>
+            }
+
+            for (let i = 0; i < arrayStr.length; i++) {
+              const heroiAtual = arrayStr[i];
+              const heroiAtualImg = heroiAtual.urlImg;
+              const heroiAtualAttImg = heroiAtual.attributeImg;
+              let strHeroCard = document.createElement("div");
+              let strHeroImg = document.createElement("div");
+              let strHeroName = document.createElement("div");
+              let strHeroAttribute = document.createElement("img");
+              strHeroImg.style.backgroundImage = "url('" + heroiAtualImg + "')";
+              strHeroAttribute.src = heroiAtualAttImg;
+              strHeroAttribute.classList.add("heroAttributeImg");
+              strHeroImg.classList.add("heroImgCover", "heroPortrait");
+              strHeroImg.src = heroiAtualImg;
+              strHeroCard.setAttribute("id", heroiAtual.name);
+              strHeroName.textContent = heroiAtual.name;
+              strHeroName.classList.add("heroName");
+              strHeroCard.appendChild(strHeroImg);
+              strHeroImg.appendChild(strHeroName);
+              strHeroName.appendChild(strHeroAttribute);
+              strGroupHeroe.appendChild(strHeroCard);
+            }
+
+            for (let i = 0; i < arrayInt.length; i++) {
+              const heroiAtual = arrayInt[i];
+              const heroiAtualImg = heroiAtual.urlImg;
+              const heroiAtualAttImg = heroiAtual.attributeImg;
+              let intHeroCard = document.createElement("div");
+              let intHeroImg = document.createElement("div");
+              let intHeroName = document.createElement("div");
+              let intHeroAttribute = document.createElement("img");
+              intHeroImg.style.backgroundImage = "url('" + heroiAtualImg + "')";
+              intHeroAttribute.src = heroiAtualAttImg;
+              intHeroAttribute.classList.add("heroAttributeImg");
+              intHeroImg.classList.add("heroImgCover", "heroPortrait");
+              intHeroImg.src = heroiAtualImg;
+              intHeroCard.setAttribute("id", heroiAtual.name);
+              intHeroName.textContent = heroiAtual.name;
+              intHeroName.classList.add("heroName");
+              intHeroCard.appendChild(intHeroImg);
+              intHeroImg.appendChild(intHeroName);
+              intHeroName.appendChild(intHeroAttribute);
+              intGroupHeroe.appendChild(intHeroCard);
+            }
+            console.log(arrayStr);
+            console.log(arrayInt);
+            console.log(arrayAgi);
+            console.log();
+          })
+          .catch();
+      });
     </script>
     <title>DOTA 1 V 1</title>
     <style>
@@ -114,24 +140,23 @@
       }
 
       .hero-groups-container {
-        display:flex;
+        display: flex;
         flex-direction: column;
-        height:50vh ;
-        width:100vw ;
-                                
+        height: 50vh;
+        width: 100vw;
       }
 
       .hero-group {
-        display:flex;
-        flex-direction:row;
-        height:30vh;
-        width:100vw;
+        display: flex;
+        flex-direction: row;
+        height: 30vh;
+        width: 100vw;
         flex-wrap: wrap;
         margin-left: 30px;
-        
-        align-content: space-around;   
-        margin-top: 15px;      
-                   
+
+        align-content: space-around;
+        margin-top: 15px;
+        z-index: 1;
       }
 
       .background::before {
@@ -155,7 +180,7 @@
         font-weight: 400;
         font-style: normal;
       }
-      
+
       .centralized-text {
         text-align: center;
       }
@@ -168,39 +193,43 @@
       }
 
       .heroPortrait {
-        
         position: relative;
         height: 8vh;
         width: 6vw;
         margin-left: 7px;
         margin-top: 7px;
-
       }
 
-      .heroPortrait:hover {                   
+      .heroPortrait:hover {
         height: 10vh;
         width: 8vw;
         transition: width 1s, height 1s;
       }
 
-      .heroPortrait:hover .heroName {             
+      .heroPortrait2 {
+        height: 10vh;
+        width: 8vw;
+        border-style: solid;
+        border-color: red;
+      }
+
+      .heroPortrait:hover .heroName {
         /* visibility: visible; */
         opacity: 1;
         transition: opacity 1.5s;
       }
 
-      .heroImgCover { 
-        
+      .heroImgCover {
         background-size: cover;
-        background-position: center ;
-      } 
+        background-position: center;
+      }
 
-      .heroName { 
+      .heroName {
         display: flex;
         flex-wrap: nowrap;
         opacity: 0;
         /* visibility: hidden; */
-        position:absolute;
+        position: absolute;
         bottom: 0px;
         right: 0px;
       }
@@ -208,14 +237,30 @@
       .heroAttributeImg {
         position: relative;
         width: 1vw;
-        height:  2vh;
-        
+        height: 2vh;
       }
 
-
-    
-
-
+      .heroPickDiv {
+        display: flex;
+        justify-content: space-around;
+        position: absolute;
+        height: 250px;
+        width: 300px;
+        z-index:1 
+      }
+      .divMotherBtn {
+        display: flex;
+        position: fixed;
+        display: block;
+        height: 40%;
+        width: 40%;
+        z-index:3;
+        background-color: red; 
+        top:30%;
+        right: right;
+        bottom: bottom;
+        left: 27%;
+      }
     </style>
   </head>
 
@@ -229,17 +274,22 @@
     </div>
 
     <div class="hero-groups-container white-text">
-        <div class = "hero-group " id="str">
-        
-            
+      <div class="hero-group" id="str"></div>
+      <div class="hero-group" id="agi"></div>
+      <div class="hero-group" id="int"></div>
+    </div>
+    
+    <div id="mrBtn" class="divMotherBtn">
+        <div id="0" >
+          Heroi posição 0 do array
+        <div id="vs">
+            img VS
         </div>
-        <div class = "hero-group " id="agi">
-
+        <div id="1" >
+            heroi posição 1 do array
         </div>
-        <div class = "hero-group " id="int">
-
-        </div>
-
+        <button classe="styleBtn" id="Repick">Repick</button>
+        <button classe="styleBtn" id="Battle">Battle</button>
     </div>
   </body>
 </html>
