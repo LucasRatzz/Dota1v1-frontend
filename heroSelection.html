@@ -5,18 +5,40 @@
     <script>
       let arrayAgi = [];
       let arrayStr = [];
-      let arrayInt = [];
-      let duelHereosSelect = [];
+      let arrayInt = []; // drow aq
+      let duelHeroesSelect = []; //
+      // let selectedHeroesToBattle = []
+      let allHeroesPull = [];
 
       let chooseAHero = (e) => {
-        if (duelHereosSelect.length < 2) {
-          let heroName = document
-            .getElementById(e.target.id)
-            .classList.add("heroPortrait2");
-          duelHereosSelect.push(heroName);
+        if (duelHeroesSelect.length < 2) {
+          let heroName = document.getElementById(e.target.id).innerText;
+
+          let heroe = allHeroesPull.find((hero) => hero.name == heroName);
+          console.log(`tesão pia ${heroe.name} and ${heroe.urlImg}`);
+          // let log = JSON.stringify(allHeroesPull)
+          // console.log('este e o pull de herois'+ JSON.stringify(allHeroesPull))
+          if (duelHeroesSelect.length < 1) {
+            let setHeroImg1 = document.getElementById("0");
+            setHeroImg1.style.backgroundImage = "url('" + heroe.urlImg + "')";
+            setHeroImg1.classList.add("heroPortrait2");
+          }
+          if (duelHeroesSelect.length == 1) {
+            let setHeroImg2 = document.getElementById("1");
+            setHeroImg2.style.backgroundImage = "url('" + heroe.urlImg + "')";
+            setHeroImg2.classList.add("heroPortrait2");
+          }
+          let setVsImgModal = document.getElementById("vs");
+          //setVsImgModal.body.style.backgroundImage = "url(versus_che2.png)"
+          document.getElementById(e.target.id).classList.add("heroPortrait2");
+          duelHeroesSelect.push(heroName);
         }
 
-        if (duelHereosSelect.length == 2) {
+        if (duelHeroesSelect.length == 2) {
+          let showModal = document.getElementById("mrBtn");
+          showModal.style.display = "flex";
+          showModal.style.flex = "justify-content|center";
+
           // lógica da janela de confirmacao
         }
         // verificar array de herois selecionados
@@ -25,7 +47,9 @@
         // se houver 2, não seleciona
         console.log(e);
       };
-      console.log(duelHereosSelect);
+
+      console.log(duelHeroesSelect);
+
       document.addEventListener("DOMContentLoaded", () => {
         axios
           .get("http://localhost:3000/heroes")
@@ -45,6 +69,8 @@
             let strGroupHeroe = document.getElementById("str");
             let intGroupHeroe = document.getElementById("int");
 
+            allHeroesPull = arrayAgi.concat(arrayInt, arrayStr);
+            console.log(allHeroesPull);
             for (let i = 0; i < arrayAgi.length; i++) {
               const heroiAtual = arrayAgi[i];
               const heroiAtualImg = heroiAtual.urlImg;
@@ -89,8 +115,9 @@
               strHeroAttribute.classList.add("heroAttributeImg");
               strHeroImg.classList.add("heroImgCover", "heroPortrait");
               strHeroImg.src = heroiAtualImg;
-              strHeroCard.setAttribute("id", heroiAtual.name);
+              strHeroImg.setAttribute("id", heroiAtual.name);
               strHeroName.textContent = heroiAtual.name;
+              strHeroImg.setAttribute("onclick", "chooseAHero(event)");
               strHeroName.classList.add("heroName");
               strHeroCard.appendChild(strHeroImg);
               strHeroImg.appendChild(strHeroName);
@@ -111,8 +138,9 @@
               intHeroAttribute.classList.add("heroAttributeImg");
               intHeroImg.classList.add("heroImgCover", "heroPortrait");
               intHeroImg.src = heroiAtualImg;
-              intHeroCard.setAttribute("id", heroiAtual.name);
+              intHeroImg.setAttribute("id", heroiAtual.name);
               intHeroName.textContent = heroiAtual.name;
+              intHeroImg.setAttribute("onclick", "chooseAHero(event)");
               intHeroName.classList.add("heroName");
               intHeroCard.appendChild(intHeroImg);
               intHeroImg.appendChild(intHeroName);
@@ -246,20 +274,80 @@
         position: absolute;
         height: 250px;
         width: 300px;
-        z-index:1 
+        z-index: 1;
       }
       .divMotherBtn {
         display: flex;
         position: fixed;
-        display: block;
+        display: none;
         height: 40%;
         width: 40%;
-        z-index:3;
-        background-color: red; 
-        top:30%;
+        z-index: 3;
+        background-color: red;
+        top: 30%;
         right: right;
         bottom: bottom;
         left: 27%;
+      }
+
+      .button {
+        /*basic styles*/
+        width: 250px;
+        height: 70px;
+        color: #171717;
+        background-color: #4f4f4f;
+        text-align: center;
+        font-size: 30px;
+        line-height: 50px;
+
+        /*gradient styles*/
+        background: -webkit-gradient(
+          linear,
+          0% 0%,
+          0% 100%,
+          from(#4f4f4f),
+          to(#1d1d1d)
+        );
+        background: -moz-linear-gradient(19% 75% 90deg, #1d1d1d, #4f4f4f);
+
+        /*border styles*/
+        border-top: solid 2px #8f8f8f;
+        border-bottom: solid 2px #1a1a1a;
+        border-left: solid 2px #4f4f4f;
+        border-right: solid 2px #4f4f4f;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        border-radius: 2px;
+      }
+
+      .button p {
+        font-size: 30px;
+        line-height: 70px;
+        font-family: verdana, sans-serif;
+        font-weight: bold;
+        text-shadow: 0px 2px 3px #444;
+      }
+
+      a {
+        text-decoration: none;
+        color: fff;
+      }
+
+      .button:hover {
+        background: -webkit-gradient(
+          linear,
+          0% 0%,
+          0% 100%,
+          from(#616161),
+          to(#292929)
+        );
+        background: -moz-linear-gradient(19% 75% 90deg, #292929, #616161);
+        border-top: solid 2px #8f8f8f;
+        border-bottom: solid 2px #282828;
+      }
+
+      .button p:hover {
+        text-shadow: 0px 2px 3px #555;
       }
     </style>
   </head>
@@ -278,18 +366,22 @@
       <div class="hero-group" id="agi"></div>
       <div class="hero-group" id="int"></div>
     </div>
-    
+
     <div id="mrBtn" class="divMotherBtn">
-        <div id="0" >
-          Heroi posição 0 do array
-        <div id="vs">
-            img VS
-        </div>
-        <div id="1" >
-            heroi posição 1 do array
-        </div>
-        <button classe="styleBtn" id="Repick">Repick</button>
-        <button classe="styleBtn" id="Battle">Battle</button>
+      <div id="0"></div>
+      <div id="vs">
+        <img src="versus_che2.png" width="230vw" height="230vw" />
+        <div id="1"></div>
+      </div>
+
+      <div class="button">
+        <button> 
+        </button>
+        <p>Repick</p>
+      </div>
+      <div class="button">
+        <p>Batalhar com 0 piru</p>
+      </div>
     </div>
   </body>
 </html>
