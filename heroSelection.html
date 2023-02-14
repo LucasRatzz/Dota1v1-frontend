@@ -21,12 +21,10 @@
           if (duelHeroesSelect.length < 1) {
             let setHeroImg1 = document.getElementById("0");
             setHeroImg1.style.backgroundImage = "url('" + heroe.urlImg + "')";
-            setHeroImg1.classList.add("heroPortrait2");
           }
           if (duelHeroesSelect.length == 1) {
             let setHeroImg2 = document.getElementById("1");
             setHeroImg2.style.backgroundImage = "url('" + heroe.urlImg + "')";
-            setHeroImg2.classList.add("heroPortrait2");
           }
           let setVsImgModal = document.getElementById("vs");
           //setVsImgModal.body.style.backgroundImage = "url(versus_che2.png)"
@@ -35,7 +33,7 @@
         }
 
         if (duelHeroesSelect.length == 2) {
-          let showModal = document.getElementById("mrBtn");
+          let showModal = document.getElementById("divModal");
           showModal.style.display = "flex";
           showModal.style.flex = "justify-content|center";
 
@@ -278,77 +276,46 @@
       }
       .divMotherBtn {
         display: flex;
+        flex-direction: column;
         position: fixed;
         display: none;
         height: 40%;
         width: 40%;
         z-index: 3;
-        background-color: red;
+        background-color: gray;
         top: 30%;
         right: right;
         bottom: bottom;
         left: 27%;
       }
 
-      .button {
-        /*basic styles*/
-        width: 250px;
-        height: 70px;
-        color: #171717;
-        background-color: #4f4f4f;
-        text-align: center;
-        font-size: 30px;
-        line-height: 50px;
-
-        /*gradient styles*/
-        background: -webkit-gradient(
-          linear,
-          0% 0%,
-          0% 100%,
-          from(#4f4f4f),
-          to(#1d1d1d)
-        );
-        background: -moz-linear-gradient(19% 75% 90deg, #1d1d1d, #4f4f4f);
-
-        /*border styles*/
-        border-top: solid 2px #8f8f8f;
-        border-bottom: solid 2px #1a1a1a;
-        border-left: solid 2px #4f4f4f;
-        border-right: solid 2px #4f4f4f;
-        -moz-border-radius: 4px;
-        -webkit-border-radius: 4px;
-        border-radius: 2px;
+      .modalHeroes {
+        display:flex;
+        flex-direction: row;
+        
       }
 
-      .button p {
-        font-size: 30px;
-        line-height: 70px;
-        font-family: verdana, sans-serif;
-        font-weight: bold;
-        text-shadow: 0px 2px 3px #444;
+      .modalButtons {
+        display: flex;
+        flex-direction:row;
+        width: 100%;
+        justify-content: center;
+        margin-top: auto;      }
+
+      .ModalHeroesSelect {
+        width: 100%;
+      }
+      
+      .imgModalHeroesSelect {
+        display: flex;
+        flex-direction: row;
+        background-repeat: no-repeat;
+        width: 100%;
+        margin-top: 8%;
+        margin-left: 1%;
+        margin-right: 1%;
       }
 
-      a {
-        text-decoration: none;
-        color: fff;
-      }
-
-      .button:hover {
-        background: -webkit-gradient(
-          linear,
-          0% 0%,
-          0% 100%,
-          from(#616161),
-          to(#292929)
-        );
-        background: -moz-linear-gradient(19% 75% 90deg, #292929, #616161);
-        border-top: solid 2px #8f8f8f;
-        border-bottom: solid 2px #282828;
-      }
-
-      .button p:hover {
-        text-shadow: 0px 2px 3px #555;
-      }
     </style>
   </head>
 
@@ -367,20 +334,25 @@
       <div class="hero-group" id="int"></div>
     </div>
 
-    <div id="mrBtn" class="divMotherBtn">
-      <div id="0"></div>
-      <div id="vs">
-        <img src="versus_che2.png" width="230vw" height="230vw" />
-        <div id="1"></div>
-      </div>
 
-      <div class="button">
-        <button> 
-        </button>
-        <p>Repick</p>
+
+
+
+
+
+    <div id="divModal" class="divMotherBtn">
+      <div id="heroesRow" class="modalHeroes">
+        <div id="0" class="imgModalHeroesSelect"></div>
+        <div id="vs" class="imgModalHeroesSelect">
+          <img src="versus_che2.png" width="100%"/> </div>
+        <div id="1" class="imgModalHeroesSelect"></div>
       </div>
-      <div class="button">
-        <p>Batalhar com 0 piru</p>
+      <div id="divModalButtons" class="modalButtons">
+          <div>
+            <button> Repick </button>
+            <button> Battle </button>
+            <p></p>
+          </div>
       </div>
     </div>
   </body>
